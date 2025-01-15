@@ -31,12 +31,14 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         email = attrs.get("username")
         password = attrs.get("password")
-
+        
+        
         # Authenticate user using email
-        user = authenticate(username=email, password=password)
-        if not user:
+        user = CustomUser.objects.filter(email=email).first()
+        # # Authenticate user using email
+        # user = authenticate(username=email, password=password)
+        if user is None or not user.check_password(password):
             raise serializers.ValidationError("Invalid email or password.")
-
         # Use the default token creation process
         data = super().validate(attrs)
         data["email"] = user.email  # Add email to the token payload
@@ -84,3 +86,10 @@ class RegisterSerializer(serializers.ModelSerializer):
         if not any(char.isalpha() for char in value):
             raise serializers.ValidationError("Password must contain at least one letter.")
         return value    
+    def create(self, validated_data):
+        # Use the create_user method to ensure proper password hashing
+        return CustomUser.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password']
+        )
