@@ -56,9 +56,6 @@ REST_FRAMEWORK = {
 
 
 
-# CSRF_TRUSTED_ORIGINS = [
-#     'http://localhost:5173',
-# ]
 # Application definition
 
 INSTALLED_APPS = [
@@ -147,14 +144,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # Replace with your email provider's SMTP server
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'alaani.hiba@gmail.com'  # Replace with your email address
-EMAIL_HOST_PASSWORD = 'uleewwcqdmjwnyqu'  # Replace with your email password
-
-
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
