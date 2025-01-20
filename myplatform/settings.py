@@ -33,10 +33,11 @@ SECRET_KEY = config('SECRET_KEY', default='fallback-secret-key')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['online-courses-be.onrender.com', 'localhost']
-CSRF_TRUSTED_ORIGINS = ['https://online-courses-be.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://online-courses-be.onrender.com','http://localhost' , 'https://online-courses-yyn0.onrender.com']
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173', # React development server
+    'http://localhost:5173', 'https://online-courses-yyn0.onrender.com'
+    # React development server
 ]
 # to use the custom user over the default django User model
 AUTH_USER_MODEL = 'core.CustomUser'
@@ -143,7 +144,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
