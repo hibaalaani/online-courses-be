@@ -30,9 +30,9 @@ SECRET_KEY = config('SECRET_KEY', default='fallback-secret-key')
 
 # DEBUG = True
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['online-courses-be.onrender.com', 'localhost']
+ALLOWED_HOSTS = ['online-courses-be.onrender.com', 'localhost','127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['https://online-courses-be.onrender.com','http://localhost' , 'https://online-courses-yyn0.onrender.com']
 
 CORS_ALLOWED_ORIGINS = [
