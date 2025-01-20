@@ -32,7 +32,8 @@ SECRET_KEY = config('SECRET_KEY', default='fallback-secret-key')
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['online-courses-be.onrender.com', 'localhost']
+CSRF_TRUSTED_ORIGINS = ['https://online-courses-be.onrender.com']
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173', # React development server

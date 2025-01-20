@@ -31,7 +31,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
       path('api/', include(router.urls)),
       path('user/', include('core.urls')),
-    #   path('user/', include('django.contrib.auth.urls')),
+  path('', lambda request: HttpResponse("Welcome to the Django Backend!")),
     
 ] 
 
