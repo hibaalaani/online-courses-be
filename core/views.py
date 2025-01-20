@@ -31,26 +31,20 @@ class BookingViewSet(ModelViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
 
-import logging
 
-logger = logging.getLogger(__name__)
 
 class RegisterView(APIView):
     def post(self , request):
-        logger.info("Register endpoint called with data: %s", request.data)
         serializer = RegisterSerializer(data = request.data)
         
         if serializer.is_valid():
             user = serializer.save()  # Uses the serializer to create a new user
             print(f"User created: {user}") 
-            logger.info("User created: %s", user)
             return Response({'message': "User registered successfully" , 'user': {
         'id': user.id,
         'username': user.username,
         'email': user.email,
     }}, status=status.HTTP_201_CREATED)
-        logger.error("Validation errors: %s", serializer.errors)  
-        logger.exception("Error in register endpoint")  
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CustomTokenObtainPairView(TokenObtainPairView):
