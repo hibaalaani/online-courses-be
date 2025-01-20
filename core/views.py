@@ -13,8 +13,7 @@ from .models import Topic, Project, Booking , ContactMessage , CustomUser
 from .serializers import TopicSerializer, ProjectSerializer, BookingSerializer , ContactSerializer , CustomTokenObtainPairSerializer , RegisterSerializer
 
 from rest_framework_simplejwt.views import TokenObtainPairView
-# from rest_framework.authtoken.models import Token
-# from django.contrib.auth import authenticate
+
 
 
 
@@ -41,7 +40,11 @@ class RegisterView(APIView):
         if serializer.is_valid():
             user = serializer.save()  # Uses the serializer to create a new user
             print(f"User created: {user}") 
-            return Response({'message': "User registered successfully"}, status=status.HTTP_201_CREATED)
+            return Response({'message': "User registered successfully" , 'user': {
+        'id': user.id,
+        'username': user.username,
+        'email': user.email,
+    }}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CustomTokenObtainPairView(TokenObtainPairView):

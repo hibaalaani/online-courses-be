@@ -41,8 +41,10 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             raise serializers.ValidationError("Invalid email or password.")
         # Use the default token creation process
         data = super().validate(attrs)
+        print(user)
         data["email"] = user.email  # Add email to the token payload
         data["username"] = user.username  # Add username to the token payload
+        data['joined'] = user.date_joined
         return data
     
     
