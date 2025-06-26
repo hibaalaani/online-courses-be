@@ -40,6 +40,17 @@ class RegisterView(APIView):
         if serializer.is_valid():
             user = serializer.save()  # Uses the serializer to create a new user
             print(f"User created: {user}") 
+             try:
+                email = EmailMessage(
+    subject="Welcome to Bug to Byte 🎉",
+    body=f"Hi {user.username},\n\nThanks for registering with us. You can now start learning coding!",
+    from_email='alaani.hiba@gmail.com',
+    to=[user.email],
+)
+                email.send()
+            except Exception as e:
+                print("Error sending registration email:", e)
+            
             return Response({'message': "User registered successfully" , 'user': {
         'id': user.id,
         'username': user.username,
