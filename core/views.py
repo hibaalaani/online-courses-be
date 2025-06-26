@@ -42,11 +42,11 @@ class RegisterView(APIView):
             print(f"User created: {user}") 
              try:
                 email = EmailMessage(
-    subject="Welcome to Bug to Byte 🎉",
-    body=f"Hi {user.username},\n\nThanks for registering with us. You can now start learning coding!",
-    from_email='alaani.hiba@gmail.com',
-    to=[user.email],
-)
+                subject="Welcome to Bug to Byte 🎉",
+                body=f"Hi {user.username},\n\nThanks for registering with us. You can now start learning coding!",
+                from_email='alaani.hiba@gmail.com',
+                to=[user.email],
+                )
                 email.send()
             except Exception as e:
                 print("Error sending registration email:", e)
