@@ -73,12 +73,14 @@ class ContactView(APIView):
             print("Validated Data:", serializer.validated_data)
             print(f"Name: {name}, Email: {email}, Message: {message}")
             try:
-                send_mail(
-                subject=f"Contact Form Submission: {name}",
-                message=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}",
-                from_email={email},
-                recipient_list=['alaani.hiba@gmail.com'],  # Replace with your email
-                    )
+                email_message = EmailMessage(
+                    subject=f"Contact Form Submission: {name}",
+                    body=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}",
+                    from_email="alaani.hiba@gmail.com",  # Must match your SMTP auth
+                    to=["alaani.hiba@gmail.com"],
+                    reply_to=[email],  # Let "Reply" go to the sender
+                )
+                email_message.send()
                 return Response({'message':"Contact message submitted successfully"}, status=status.HTTP_201_CREATED)
             except Exception as error:
                 
