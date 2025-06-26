@@ -40,7 +40,7 @@ class RegisterView(APIView):
         if serializer.is_valid():
             user = serializer.save()  # Uses the serializer to create a new user
             print(f"User created: {user}") 
-             try:
+            try:
                 email = EmailMessage(
                 subject="Welcome to Bug to Byte 🎉",
                 body=f"Hi {user.username},\n\nThanks for registering with us. You can now start learning coding!",
