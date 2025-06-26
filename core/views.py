@@ -76,7 +76,7 @@ class ContactView(APIView):
                 send_mail(
                 subject=f"Contact Form Submission: {name}",
                 message=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}",
-                from_email=email,
+                from_email={email},
                 recipient_list=['alaani.hiba@gmail.com'],  # Replace with your email
                     )
                 return Response({'message':"Contact message submitted successfully"}, status=status.HTTP_201_CREATED)
